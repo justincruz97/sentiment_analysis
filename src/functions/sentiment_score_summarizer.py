@@ -6,6 +6,15 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize, sent_tokenize
 
 def summarize_by_score(text):
+    """
+    Summarize a body of text from a CNN article
+
+    Args:
+        - text (str): Extracted body of text from a CNN article
+    
+    Returns:
+        - summary (str): Summarized version of text
+    """
     # Tokenizing the text
     print("RUNNING summarize_by_score")
     stopWords = set(stopwords.words("english"))

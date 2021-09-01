@@ -3,6 +3,15 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
 def scrape_cnn(html):
+    """
+    Scrape text from a CNN article 
+
+    Args:
+        - html (str): html link of a CNN article
+    
+    Returns:
+        - text (str): body of text extracted from the CNN article
+    """
     link = urlopen(html).read()
     soup = BeautifulSoup(link, features="html.parser")
     for script in soup(["script", "style"]):
@@ -10,7 +19,3 @@ def scrape_cnn(html):
     # get text
     text = soup.find_all("div",{"class":"zn-body__paragraph"})
     return ''.join(i.text for i in text)
-
-# text = scrape_cnn("https://www.cnn.com/2021/05/03/us/alleged-kevin-spacey-victim-suit/index.html")
-# print(text)
-
