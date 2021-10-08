@@ -1,4 +1,4 @@
-# Summarize a body of text
+# Summarize with Cosine Similarity
 # Credits to https://towardsdatascience.com/understand-text-summarization-and-create-your-own-summarizer-in-python-b26a9f09fc70
 
 from nltk.corpus import stopwords
@@ -56,7 +56,6 @@ def build_similarity_matrix(sentences, stop_words):
 
     return similarity_matrix
 
-
 def generate_summary(file_name, top_n=5):
     stop_words = stopwords.words('english')
     summarize_text = []
@@ -79,3 +78,30 @@ def generate_summary(file_name, top_n=5):
 
     # Step 5 - Output the summarized text
     print("Summarize Text: \n", ". ".join(summarize_text))
+    
+
+def generate_summary_2(file_name, top_n=5):
+    print(file_name)
+    stop_words = stopwords.words('english')
+    summarize_text = []
+
+    # Step 1 - Read text and split it
+    sentences = file_name.split(".")
+    print(sentences)
+
+    # Step 2 - Generate Similary Martix across sentences
+    sentence_similarity_martix = build_similarity_matrix(sentences, stop_words)
+
+    # Step 3 - Rank sentences in similarity martix
+    sentence_similarity_graph = nx.from_numpy_array(sentence_similarity_martix)
+    scores = nx.pagerank(sentence_similarity_graph)
+
+    # Step 4 - Sort the rank and pick top sentences
+    ranked_sentence = sorted(((scores[i],s) for i,s in enumerate(sentences)), reverse=True)   
+
+    for i in range(top_n):
+      summarize_text.append(" ".join(ranked_sentence[i][1]))
+
+    # Step 5 - Output the summarized text
+    print("Summarize Text: \n", ". ".join(summarize_text))
+    return(summarize_text)
