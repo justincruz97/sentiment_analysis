@@ -89,12 +89,6 @@ def get_articles(query):
 def summarize_text():
     with open('article_sentences.json', 'r',encoding="utf-8" ) as fp:
         article = json.load(fp)
-    # for i in data_list:
-    #    summary = generate_summary_2(i)
-
-    #  Summarize with Cosine Similarity
-    # generate_summary_2(data_list)
-    # generate_summary_2(data_list[0])
     summary = []
     # Summarize with Sentence Scoring
     for i in article:

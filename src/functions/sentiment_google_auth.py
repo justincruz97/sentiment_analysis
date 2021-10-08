@@ -1,5 +1,4 @@
 from sentiment_scraper import scrape_cnn
-# from sentiment_cosine_summarizer import generate_summary_2
 from sentiment_score_summarizer import summarize_by_score
 import requests, json
 
@@ -83,15 +82,6 @@ def build_knowledge_lake(query):
 def summarize_text():
     with open('knowledge_list.json', 'r',encoding="utf-8" ) as fp:
         data_list = json.load(fp)
-    # for i in data_list:
-    #    summary = generate_summary_2(i)
-
-    #  Summarize with Cosine Similarity
-    # generate_summary_2(data_list)
-    # generate_summary_2(data_list[0])
-
-    # Summarize with Sentence Scoring
-    # summarize_by_score(data_list[0])
     summary = []
     # Summarize with Sentence Scoring
     for i in data_list:
